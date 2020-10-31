@@ -1,15 +1,19 @@
 import java.net.*;
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 
 public class ClientN {
     private  static final int    serverPort = 8082;
     private  static final String localhost  = "127.0.0.1";
-    private static final String name = "Nikolay";
-
     public static void main(String[] ar)
     {
+        System.out.println("Введите имя клиента:");
+        final Scanner readline = new Scanner(System.in);
+        String name = readline.nextLine();
         Socket socket = null;
-        try{
+        try {
             try {
                 System.out.println("Добро пожаловать " + name + "\n\t " +
                         "Соединение с сервером\n\t" +
@@ -35,13 +39,15 @@ public class ClientN {
                 BufferedReader keyboard;
                 keyboard = new BufferedReader(streamReader);
                 String line = null;
-                System.out.println("Вводите и нажмите enter");
+                System.out.println("Вводите сообщение и нажмите enter");
                 System.out.println();
                 while (true) {
                     line = keyboard.readLine();
-                    out.writeUTF(name + ": " + line);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+                    out.writeUTF(name +  " [" + simpleDateFormat.format(new Date())+ "]" + ": " +line);
                     out.flush();
                     line = in.readUTF();
+
                     if (line.endsWith("EndWork")) {
                         break;
                     }

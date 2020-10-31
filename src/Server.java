@@ -1,5 +1,7 @@
 import java.io.*;
 import java.net.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Server extends Thread {
     private static int port = 8082;
@@ -38,11 +40,14 @@ public class Server extends Thread {
                 System.out.println("Я отправляю обратно...");
                 // Отсылаем клиенту обратно эту самую
                 // строку текста
-                String[] nameOfLine = line.split(" ");
+
                 dataOutputStream.writeUTF("Сервер получил сообщение от клиента " + nameClient + line);
                 // Завершаем передачу данных
                 dataOutputStream.flush();
                 System.out.println();
+
+
+                // Вывод текущей даты и времени с использованием toString()
                 if (line.equalsIgnoreCase("конец")) {
                     // завершаем соединение
                     socket.close();
@@ -73,7 +78,7 @@ public class Server extends Thread {
                 while (true) {
                     // ожидание подключения
                     Socket socket = serverSocket.accept();
-                    System.err.println("Client accepted");
+                    System.err.println("ClientN accepted");
                     // Стартуем обработку клиента
                     new Server().setSocket(i++, socket);
                 }

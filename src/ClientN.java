@@ -9,6 +9,7 @@ public class ClientN {
     private  static final String localhost  = "127.0.0.1";
     public static void main(String[] ar)
     {
+
         System.out.println("Введите имя клиента:");
         final Scanner readline = new Scanner(System.in);
         String name = readline.nextLine();
